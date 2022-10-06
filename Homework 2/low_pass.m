@@ -7,13 +7,13 @@ function low_pass_img = low_pass(img, conv_row, conv_col)
         conv_row = 5;
         conv_col = 5;
     end
-    conv_row_lo = -uint8((conv_row-1)/2);
+    conv_row_lo = -int16((conv_row-1)/2);
     conv_row_hi = conv_row_lo + conv_row - 1;
-    conv_col_lo = -uint8((conv_col-1)/2);
+    conv_col_lo = -int16((conv_col-1)/2);
     conv_col_hi = conv_col_lo + conv_col - 1;
     div = conv_row*conv_col;
 
-    [r, c] = size(img);
+    [r, c, d] = size(img);
     low_pass_img = double(img * 0.0);
     
     for img_i=1:r
@@ -22,9 +22,11 @@ function low_pass_img = low_pass(img, conv_row, conv_col)
             for conv_i=conv_row_lo:conv_row_hi
                 for conv_j=conv_col_lo:conv_col_hi
                     % Cek apakah cell sekitar punya index valid
-                    if img_i+int16(conv_i) >= 1 && img_i+int16(conv_i) <= r
-                        if img_j+int16(conv_j) >= 1 && img_j+int16(conv_j) <= c
-                            low_pass_img(img_i, img_j) = low_pass_img(img_i, img_j) + double(img(img_i+int16(conv_i), img_j+int16(conv_j)))/div;
+                    if img_i+conv_i >= 1 && img_i+conv_i <= r
+                        if img_j+conv_j >= 1 && img_j+conv_j <= c
+                            for k=1:d
+                                low_pass_img(img_i, img_j, k) = low_pass_img(img_i, img_j, k) + double(img(img_i+conv_i, img_j+conv_j))/div;
+                            end
                         end
                     end
                 end
