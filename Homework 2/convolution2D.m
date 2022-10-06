@@ -1,5 +1,5 @@
-% input_image = imread('standard_test_images/woman.tif'); 
-% input_image = rgb2gray(input_image);
+% input_image = imread('standard_test_images/flower.tif'); 
+% %input_image = rgb2gray(input_image);
 %  mask = [0 -1 0; 
 %           -1 5 -1; 
 %           0 -1 0];
@@ -32,13 +32,15 @@ function [ImageResult, matlab_result] = convolution2D(input_image, mask);
             end
         end
     end
-
-    subplot(1,2,1)
-    imshow(ImageResult);
-    title('Convolution result by calculation');
-
-    subplot(1,2,2)
+    
     matlab_result = convn(I, mask, 'same');
-    imshow(matlab_result);
-    title('Convolution result by MATLAB convn function');
+    
+%     subplot(1,2,1)
+%     imshow(ImageResult);
+%     title('Convolution result by calculation');
+% 
+%     subplot(1,2,2)
+%     
+%     imshow(matlab_result);
+%     title('Convolution result by MATLAB convn function');
 end
