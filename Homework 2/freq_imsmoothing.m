@@ -1,11 +1,11 @@
 
 % input_image = imread('standard_test_images/woman.tif');
 % % input_image = rgb2gray(input_image);
-% filter_type = 'BHPF';
+% filter_type = 'GHPF';
 % D0 = 50;
 % output_image = freq_imsmoothing1(input_image, filter_type, D0);
 
-function output_image = freq_imsmoothing1(input_image, filter_type, D0)
+function output_image = freq_imsmoothing(input_image, filter_type, D0)
     I = im2double(input_image);
     clear image_pad
     clear H
