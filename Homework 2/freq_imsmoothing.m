@@ -30,31 +30,31 @@ function output_image = freq_imsmoothing(input_image, filter_type, D0)
         end
     end
     
-    figure(1);
-    subplot(3,3,1);
-    imshow(I);title('original image');
+%     figure(1);
+%     subplot(3,3,1);
+%     imshow(I);title('original image');
+% 
+%     subplot(3,3,2);
+%     imshow(image_pad);title('padded image');
 
-    subplot(3,3,2);
-    imshow(image_pad);title('padded image');
-
-    % Display the Fourier Spectrum
-    for k = 1:1:colorChannel
-        % move the origin of the transform to the center
-        Fc = fftshift(fft2(image_pad(:,:,1)));
-
-        % use abs to compute the magnitude (handling imaginary)
-        % and use log to brighten display
-        S2 = log(1+abs(Fc));
-
-        if colorChannel > 1
-            subplot(3,3,3+k);
-            imshow(S2,[]); 
-            title(['Fourier spectrum ', 'color channel ', num2str(k)]);
-        else
-            subplot(3,3,3);
-            imshow(S2,[]); title('Fourier spectrum');
-        end
-    end
+%     % Display the Fourier Spectrum
+%     for k = 1:1:colorChannel
+%         % move the origin of the transform to the center
+%         Fc = fftshift(fft2(image_pad(:,:,1)));
+% 
+%         % use abs to compute the magnitude (handling imaginary)
+%         % and use log to brighten display
+%         S2 = log(1+abs(Fc));
+% 
+%         if colorChannel > 1
+%             subplot(3,3,3+k);
+%             imshow(S2,[]); 
+%             title(['Fourier spectrum ', 'color channel ', num2str(k)]);
+%         else
+%             subplot(3,3,3);
+%             imshow(S2,[]); title('Fourier spectrum');
+%         end
+%     end
 
     % Fourier transformation on padded image
     image_return = fft2(double(image_pad));
@@ -99,8 +99,8 @@ function output_image = freq_imsmoothing(input_image, filter_type, D0)
     end
 
     H = fftshift(H); 
-    subplot(3, 3, 7);
-    imshow(H);title('LPF Ideal Mask');
+%     subplot(3, 3, 7);
+%     imshow(H);title('Choosen Mask');
 
     % Multiple H with F
     H = ifftshift(H);
@@ -114,10 +114,10 @@ function output_image = freq_imsmoothing(input_image, filter_type, D0)
     % Return the image to its original size (delete the pad)
     LPF_f2 = LPF_f2(1:rows, 1:columns, :); % Resize the image to undo padding
 
-    subplot(3, 3, 9);
-    imshow(LPF_f2); title('output image');
+%     subplot(3, 3, 9);
+%     imshow(LPF_f2); title('output image');
     
     output_image = LPF_f2;
-    figure(2);
-    imshow(output_image);
+%     figure(2);
+%     imshow(output_image);
 end
